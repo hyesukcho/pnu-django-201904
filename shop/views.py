@@ -1,9 +1,20 @@
 # from django.views.generic import ListView
 from django.shortcuts import render
-from .models import Item
+from .models import Shop, Item
 
 
-# item_list = ListView.as_view(model=Item)
+def shop_list(request):
+    qs = Shop.objects.all()
+    return render(request, 'shop/shop_list.html', {
+        'shop_list': qs,
+    })
+
+
+def shop_detail(request, pk):
+    shop = Shop.objects.get(pk=pk)
+    return render(request, 'shop/shop_detail.html', {
+        'shop': shop,
+    })
 
 
 def item_list(request):

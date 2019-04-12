@@ -1,0 +1,10 @@
+<h1>Shop List</h1>
+
+<ul>
+{% for shop in shop_list %}
+    <li>
+        {{ shop.name }}
+        {{ shop.address }}
+    </li>
+{% endfor %}
+</ul>
