@@ -28,20 +28,35 @@ def shop_detail(request, pk):
 
 
 def shop_new(request):
-    if request.method == 'GET':  # 'GET', 'POST'
-        form = ShopForm()
-    else:
+    if request.method == 'POST':  # 'GET', 'POST'
         # request.GET, request.POST, request.FILES
         form = ShopForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/shop/')
+    else:
+        form = ShopForm()
     return render(request, 'shop/shop_form.html', {
         'form': form,
     })
 
 # shop_new = CreateView.as_view(model=Shop, form_class=ShopForm,
 #                               success_url='/shop/')
+
+
+def shop_edit(request, pk):
+    shop = Shop.objects.get(pk=pk)
+    if request.method == 'POST':  # 'GET', 'POST'
+        # request.GET, request.POST, request.FILES
+        form = ShopForm(request.POST, instance=shop)
+        if form.is_valid():
+            form.save()
+            return redirect('/shop/')
+    else:
+        form = ShopForm(instance=shop)
+    return render(request, 'shop/shop_form.html', {
+        'form': form,
+    })
 
 
 

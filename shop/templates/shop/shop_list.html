@@ -10,6 +10,9 @@
     <li>
         {{ shop.name }}
         {{ shop.address }}
+        <a href="/shop/{{ shop.pk }}/edit/">
+            수정
+        </a>
     </li>
 {% endfor %}
 </ul>
