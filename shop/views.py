@@ -1,6 +1,6 @@
 # from django.views.generic import ListView
 from django.shortcuts import redirect,render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Shop, Item
 from .forms import ShopForm
 
@@ -58,6 +58,8 @@ def shop_edit(request, pk):
         'form': form,
     })
 
+# shop_edit = UpdateView.as_view(model=Shop, form_class=ShopForm,
+#                                success_url='/shop/')
 
 
 def item_list(request):
