@@ -1,6 +1,7 @@
 # from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import redirect,render
 from .models import Shop, Item
+from .forms import ShopForm
 
 
 def shop_list(request):
@@ -15,6 +16,22 @@ def shop_detail(request, pk):
     return render(request, 'shop/shop_detail.html', {
         'shop': shop,
     })
+
+
+def shop_new(request):
+    if request.method == 'GET':  # 'GET', 'POST'
+        form = ShopForm()
+    else:
+        # request.GET, request.POST, request.FILES
+        form = ShopForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/shop/')
+    return render(request, 'shop/shop_form.html', {
+        'form': form,
+    })
+
+
 
 
 def item_list(request):
