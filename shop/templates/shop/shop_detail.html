@@ -6,6 +6,10 @@
             Shop: {{ shop.name }}
         </div>
         <div class="card-body">
+            {% if shop.photo %}
+                <img src="{{ shop.photo.url }}" style="max-width: 100%;" />
+            {% endif %}
+
             <!-- <h5 class="card-title">Special title treatment</h5> -->
             <p class="card-text">
                 {{ shop.address }}
