@@ -1,5 +1,10 @@
 <h1>Shop List</h1>
 
+<form action="" method="GET">
+    <input type="text" name="query" value="{{ query }}" placeholder="검색어를 입력해주세요." />
+    <input type="submit" value="검색" />
+</form>
+
 <ul>
 {% for shop in shop_list %}
     <li>

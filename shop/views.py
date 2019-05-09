@@ -5,9 +5,13 @@ from .forms import ShopForm
 
 
 def shop_list(request):
+    query = request.GET.get('query', '').strip()
     qs = Shop.objects.all()
+    if query:
+        qs = qs.filter(name__icontains=query)
     return render(request, 'shop/shop_list.html', {
         'shop_list': qs,
+        'query': query,
     })
 
 
