@@ -5,6 +5,7 @@ from django.db import models
 class Shop(models.Model):
     name = models.CharField(max_length=100,
                             validators=[MinLengthValidator(5)])
+    photo = models.ImageField(blank=True)  # Pillow 라이브러리 필수
     desc = models.TextField(blank=True)
     address = models.CharField(max_length=50, blank=True)
 

@@ -30,7 +30,7 @@ def shop_detail(request, pk):
 def shop_new(request):
     if request.method == 'POST':  # 'GET', 'POST'
         # request.GET, request.POST, request.FILES
-        form = ShopForm(request.POST)
+        form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/shop/')
@@ -48,7 +48,7 @@ def shop_edit(request, pk):
     shop = Shop.objects.get(pk=pk)
     if request.method == 'POST':  # 'GET', 'POST'
         # request.GET, request.POST, request.FILES
-        form = ShopForm(request.POST, instance=shop)
+        form = ShopForm(request.POST, request.FILES, instance=shop)
         if form.is_valid():
             form.save()
             return redirect('/shop/')
