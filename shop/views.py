@@ -27,21 +27,20 @@ def shop_detail(request, pk):
 # shop_detail = DetailView.as_view(model=Shop)
 
 
-def shop_new(request):
-    if request.method == 'POST':  # 'GET', 'POST'
-        # request.GET, request.POST, request.FILES
-        form = ShopForm(request.POST, request.FILES)
-        if form.is_valid():
-            shop = form.save()
-            return redirect('/shop/{}/'.format(shop.pk))
-    else:
-        form = ShopForm()
-    return render(request, 'shop/shop_form.html', {
-        'form': form,
-    })
+# def shop_new(request):
+#     if request.method == 'POST':  # 'GET', 'POST'
+#         # request.GET, request.POST, request.FILES
+#         form = ShopForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             shop = form.save()
+#             return redirect('/shop/{}/'.format(shop.pk))
+#     else:
+#         form = ShopForm()
+#     return render(request, 'shop/shop_form.html', {
+#         'form': form,
+#     })
 
-# shop_new = CreateView.as_view(model=Shop, form_class=ShopForm,
-#                               success_url='/shop/')
+shop_new = CreateView.as_view(model=Shop, form_class=ShopForm)
 
 
 def shop_edit(request, pk):
@@ -51,7 +50,8 @@ def shop_edit(request, pk):
         form = ShopForm(request.POST, request.FILES, instance=shop)
         if form.is_valid():
             shop = form.save()
-            return redirect('/shop/{}/'.format(shop.pk))
+            # return redirect('/shop/{}/'.format(shop.pk))
+            return redirect(shop)
     else:
         form = ShopForm(instance=shop)
     return render(request, 'shop/shop_form.html', {

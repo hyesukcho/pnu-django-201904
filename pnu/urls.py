@@ -6,11 +6,11 @@ from django.urls import include, path
 # FIXME: 이 코드는 RedirectView에 의해서 제거될 것입니다.
 from django.shortcuts import redirect
 def root(request):
-    return redirect("/shop/")
+    return redirect("shop:shop_list")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),
+    path('weblog/', include('blog.urls')),
     path('shop/', include('shop.urls')),
     path('', root),
 ]
