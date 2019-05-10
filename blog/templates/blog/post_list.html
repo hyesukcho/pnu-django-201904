@@ -4,7 +4,7 @@
         {% for post in post_list %}
             <tr>
                 <td>{{ post.title }}</td>
-                <td>{{ post.ip }}</td>
+                <td>{{ post.masked_ip }}</td>
                 <td>{{ post.created_at }}</td>
             </tr>
         {% endfor %}
