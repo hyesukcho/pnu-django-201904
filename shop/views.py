@@ -32,8 +32,8 @@ def shop_new(request):
         # request.GET, request.POST, request.FILES
         form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('/shop/')
+            shop = form.save()
+            return redirect('/shop/{}/'.format(shop.pk))
     else:
         form = ShopForm()
     return render(request, 'shop/shop_form.html', {
@@ -50,8 +50,8 @@ def shop_edit(request, pk):
         # request.GET, request.POST, request.FILES
         form = ShopForm(request.POST, request.FILES, instance=shop)
         if form.is_valid():
-            form.save()
-            return redirect('/shop/')
+            shop = form.save()
+            return redirect('/shop/{}/'.format(shop.pk))
     else:
         form = ShopForm(instance=shop)
     return render(request, 'shop/shop_form.html', {
