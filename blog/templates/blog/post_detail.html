@@ -1,4 +1,7 @@
+{% extends "blog/layout.html" %}
 
-<h2>{{ post.title }}</h2>
+{% block content %}
+    <h2>{{ post.title }}</h2>
 
-{{ post.content }}
+    {{ post.content }}
+{% endblock %}
