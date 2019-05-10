@@ -1,11 +1,12 @@
 {% extends "blog/layout.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
+
+        {% bootstrap_form form %}
+
         <input type="submit" />
     </form>
 {% endblock %}
