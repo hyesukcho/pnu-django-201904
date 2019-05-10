@@ -1,6 +1,10 @@
+from django.views.generic import ListView
 from django.shortcuts import redirect, render
 from .forms import PostForm
 from .models import Post
+
+
+post_list = ListView.as_view(model=Post)
 
 
 def post_new(request):
@@ -10,7 +14,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.ip = request.META['REMOTE_ADDR']
             post.save()
-            return redirect('/')
+            return redirect('/blog/')
     else:
         form = PostForm()
     return render(request, 'blog/post_form.html', {

@@ -1,0 +1,14 @@
+
+<table>
+    <tbody>
+        {% for post in post_list %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.ip }}</td>
+                <td>{{ post.created_at }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/blog/new/">New Post</a>
