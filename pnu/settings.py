@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'debug_toolbar',
     'django_extensions',
+    'django-summernote',
     'accounts',
     'blog',
     'shop',
