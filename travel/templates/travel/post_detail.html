@@ -1,0 +1,86 @@
+{% extends "travel/layout.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="card">
+        {% if post.photo %}
+            <img src="{{ post.photo.url }}" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">
+                {{ post.content|linebreaks }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'travel:post_list' %}" class="btn btn-sm btn-secondary">목록</a>
+            <a href="{% url 'travel:post_edit' post.pk %}" class="btn btn-sm btn-primary">수정</a>
+            <a href="#" class="btn btn-sm btn-danger">삭제</a>
+        </div>
+    </div>
+
+    <form action="{% url 'travel:comment_new' post.pk %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form comment_form %}
+        <input type="submit" value="댓글 쓰기" class="btn btn-primary btn-block" />
+    </form>
+
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li id="comment-{{ comment.pk }}">
+            {{ comment.message }}
+            by {{ comment.author }}
+            at {{ comment.created_at }}            
+            {% if comment.author == user %}
+                <a href="{% url 'travel:comment_edit' post.pk comment.pk %}">
+                    Edit
+                </a>
+                <a href="{% url 'travel:comment_delete' post.pk comment.pk %}"
+                    data-target-id="comment-{{ comment.pk }}"
+                    class="text-danger comment-delete-btn">
+                    Delete
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <hr/>
+
+    <a href="{% url 'travel:comment_new' post.pk %}">
+        댓글 쓰기
+    </a>
+
+    <a href="{% url 'travel:post_list' %}">
+        목록으로
+    </a>
+{% endblock %}
+
+{% block extra_body %}
+    <button id="test_btn">테스트</button>
+    <script>
+        $(function() {
+            // 문서가 준비되었을 때 호출
+            $('.comment-delete-btn').click(function() {
+                var url = $(this).attr('href');
+                console.log("url :", url);
+                var target_id = $(this).data('target-id');
+                if ( confirm("Are you sure?") ) {
+                    // TODO: comment_delete 뷰에 POST 요청 보내기
+                    $.post(url).done(function() {
+                        $('#' + target_id).remove();
+                    });
+                }
+                return false;
+            });
+
+            $("#test_btn").click(function() {
+                console.log("clicked");
+                $("li").remove();
+            });
+            for(var i=0; i<10; i++) {
+                console.log("loaded");
+            }
+        });
+    </script>
+{% endblock %}
